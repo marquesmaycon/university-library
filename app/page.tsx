@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
 
 export default function Home() {
-   return <Button>Ola mundor</Button>
+   return <Button className="gradient-vertical">Olá mundo</Button>
 }
