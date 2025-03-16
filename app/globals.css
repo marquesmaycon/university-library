@@ -184,6 +184,12 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
   .hide-scrollbar::-webkit-scrollbar {
     width: 0px;
     height: 0px;
@@ -221,6 +227,12 @@
 }
 
 @layer components {
+  .root-container {
+    @apply flex min-h-screen flex-1 flex-col pattern bg-cover bg-top bg-dark-100 px-5 xs:px-10 md:px-16;
+  }
+}
+
+@layer utilities {
   /* Auth */
   .auth-container {
     @apply relative flex flex-col-reverse text-light-100 sm:flex-row;
@@ -239,9 +251,9 @@
   }
 
   /* Root */
-  .root-container {
+  /* .root-container {
     @apply flex min-h-screen flex-1 flex-col pattern bg-cover bg-top bg-dark-100 px-5 xs:px-10 md:px-16;
-  }
+  } */
 
   /* Book Details */
   .book-details {
