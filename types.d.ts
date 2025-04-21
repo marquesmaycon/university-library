@@ -1,5 +1,5 @@
 type Book = {
-   id: string
+   id: number
    title: string
    author: string
    genre: string
@@ -11,5 +11,6 @@ type Book = {
    coverUrl: string
    videoUrl: string
    summary: string
-   createdAt: Date | null
+   isLoaned?: boolean
+   // createdAt: Date | null
 }

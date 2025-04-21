@@ -1,5 +1,6 @@
-import Image from "next/image"
 import React from "react"
+import Image from "next/image"
+
 import { Button } from "./ui/button"
 import BookCover from "./BookCover"
 
@@ -15,8 +16,7 @@ export default function BookOverview({
    coverColor,
    coverUrl,
    videoUrl,
-   summary,
-   createdAt
+   summary
 }: Book) {
    return (
       <section className="book-overview">
