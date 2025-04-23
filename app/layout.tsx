@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
 import localFont from "next/font/local"
+import { Toaster } from "sonner"
+import type { Metadata } from "next"
 
 import "./globals.css"
 
@@ -29,7 +30,10 @@ export default function RootLayout({
 }>) {
    return (
       <html lang="en">
-         <body className={`${ibmPlexSans.className} ${bebasNeue.variable} antialiased`}>{children}</body>
+         <body className={`${ibmPlexSans.className} ${bebasNeue.variable} antialiased`}>
+            {children}
+            <Toaster />
+         </body>
       </html>
    )
 }
