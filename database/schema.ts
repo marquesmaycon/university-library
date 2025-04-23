@@ -8,9 +8,9 @@ export const users = pgTable("users", {
    id: uuid("id").notNull().primaryKey().defaultRandom().unique(),
    fullName: varchar("full_name", { length: 255 }).notNull(),
    email: text("email").notNull().unique(),
-   universityId: integer("university_id").notNull().unique(),
    password: text("password").notNull(),
-   univerityCard: text("university_card").notNull(),
+   universityId: integer("university_id").notNull().unique(),
+   universityCard: text("university_card").notNull(),
    status: STATUS_ENUM("status").default("PENDING").notNull(),
    role: ROLE_ENUM("role").default("USER"),
    lastActivityDate: date("last_activity_date").notNull().defaultNow(),
@@ -18,6 +18,7 @@ export const users = pgTable("users", {
    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
    updatedAt: timestamp("updated_at", { withTimezone: true })
       .notNull()
+      .defaultNow()
       .$onUpdate(() => new Date())
 })
 
