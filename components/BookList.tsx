@@ -5,7 +5,7 @@ import BookCard from "./BookCard"
 type Props = {
    title: string
    books: Book[]
-   containerClassName: string
+   containerClassName?: string
 }
 
 export default function BookList({ title, books, containerClassName }: Props) {

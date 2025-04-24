@@ -15,7 +15,7 @@ import { toast } from "sonner"
 import config from "@/lib/config"
 import { authenticator } from "@/lib/imagekit"
 
-const ImageUpload = () => {
+const ImageUpload = ({ onFileChange }: { onFileChange: (file?: UploadResponse["filePath"] | null) => void }) => {
    const [file, setFile] = useState<UploadResponse | null>(null)
    const fileInputRef = useRef<HTMLInputElement>(null)
 
@@ -49,6 +49,7 @@ const ImageUpload = () => {
             // abortSignal: abortController.signal
          })
          setFile(uploadResponse)
+         onFileChange(uploadResponse.filePath)
          toast.success("File uploaded successfully: " + uploadResponse.filePath)
       } catch (error) {
          if (error instanceof ImageKitAbortError) {

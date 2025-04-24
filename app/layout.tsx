@@ -1,6 +1,9 @@
 import localFont from "next/font/local"
+import { SessionProvider } from "next-auth/react"
 import { Toaster } from "sonner"
 import type { Metadata } from "next"
+
+import { auth } from "@/auth"
 
 import "./globals.css"
 
@@ -23,17 +26,20 @@ export const metadata: Metadata = {
    description: "A book borrowing tracking app"
 }
 
-export default function RootLayout({
+export default async function RootLayout({
    children
 }: Readonly<{
    children: React.ReactNode
 }>) {
+   const session = await auth()
    return (
       <html lang="en">
-         <body className={`${ibmPlexSans.className} ${bebasNeue.variable} antialiased`}>
-            {children}
-            <Toaster />
-         </body>
+         <SessionProvider session={session}>
+            <body className={`${ibmPlexSans.className} ${bebasNeue.variable} antialiased`}>
+               {children}
+               <Toaster />
+            </body>
+         </SessionProvider>
       </html>
    )
 }

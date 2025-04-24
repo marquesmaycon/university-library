@@ -14,3 +14,11 @@ type Book = {
    isLoaned?: boolean
    // createdAt: Date | null
 }
+
+type AuthCredentials = {
+   fullName: string
+   email: string
+   password: string
+   universityId: number
+   universityCard: string
+}
