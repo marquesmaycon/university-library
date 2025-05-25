@@ -9,68 +9,78 @@ import { signIn } from "@/auth"
 import { headers } from "next/headers"
 import ratelimit from "../ratelimit"
 import { redirect } from "next/navigation"
+import { workflowClient } from "../workflow"
+import config from "../config"
 
 export const signInWithCredentials = async (params: Pick<AuthCredentials, "email" | "password">) => {
-   const { email, password } = params
+  const { email, password } = params
 
-   const ip = (await headers()).get("x-forwarded-for") || "127.0.0.1"
+  const ip = (await headers()).get("x-forwarded-for") || "127.0.0.1"
 
-   const { success } = await ratelimit.limit(ip)
+  const { success } = await ratelimit.limit(ip)
 
-   if (!success) redirect("/too-fast")
+  if (!success) redirect("/too-fast")
 
-   try {
-      const res = await signIn("credentials", {
-         email,
-         password,
-         redirect: false
-      })
+  try {
+    const res = await signIn("credentials", {
+      email,
+      password,
+      redirect: false
+    })
 
-      if (res?.error) {
-         return {
-            success: false,
-            error: res.error
-         }
-      }
-
-      return { success: true }
-   } catch (error) {
-      console.log("SignIn error", error)
+    if (res?.error) {
       return {
-         success: false,
-         error: "Error signing in"
+        success: false,
+        error: res.error
       }
-   }
+    }
+
+    return { success: true }
+  } catch (error) {
+    console.log("SignIn error", error)
+    return {
+      success: false,
+      error: "Error signing in"
+    }
+  }
 }
 
 export const signUp = async (params: AuthCredentials) => {
-   const { fullName, email, universityId, universityCard, password } = params
+  const { fullName, email, universityId, universityCard, password } = params
 
-   const existingUser = await db.select().from(users).where(eq(users.email, email)).limit(1)
+  const existingUser = await db.select().from(users).where(eq(users.email, email)).limit(1)
 
-   if (existingUser.length > 0) {
-      return {
-         success: false,
-         error: "User already exists"
+  if (existingUser.length > 0) {
+    return {
+      success: false,
+      error: "User already exists"
+    }
+  }
+
+  const hashedPassword = await hash(password, 10)
+
+  try {
+    await db.insert(users).values({
+      fullName,
+      email,
+      universityId,
+      password: hashedPassword,
+      universityCard
+    })
+
+    await workflowClient.trigger({
+      url: `${config.env.prodApiEndpoint}/api/workflows/onboarding`,
+      body: {
+        email,
+        fullName
       }
-   }
+    })
 
-   const hashedPassword = await hash(password, 10)
+    await signInWithCredentials({ email, password })
 
-   try {
-      await db.insert(users).values({
-         fullName,
-         email,
-         universityId,
-         password: hashedPassword,
-         universityCard
-      })
-
-      await signInWithCredentials({ email, password })
-
-      return { success: true }
-   } catch (error) {
-      console.log("SignUp error", error)
-      return { success: false, error: "Error creating user" }
-   }
+    return { success: true }
+  } catch (error) {
+    console.log("SignUp error", error)
+    return { success: false, error: "Error creating user" }
+  }
 }
