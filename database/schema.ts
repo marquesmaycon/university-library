@@ -5,22 +5,38 @@ export const ROLE_ENUM = pgEnum("role", ["USER", "ADMIN"])
 export const BORROW_STATUS_ENUM = pgEnum("borrow_status", ["BORROWED", "RETURNED"])
 
 export const users = pgTable("users", {
-   id: uuid("id").notNull().primaryKey().defaultRandom().unique(),
-   fullName: varchar("full_name", { length: 255 }).notNull(),
-   email: text("email").notNull().unique(),
-   password: text("password").notNull(),
-   universityId: integer("university_id").notNull().unique(),
-   universityCard: text("university_card").notNull(),
-   status: STATUS_ENUM("status").default("PENDING").notNull(),
-   role: ROLE_ENUM("role").default("USER"),
-   lastActivityDate: date("last_activity_date").notNull().defaultNow(),
+  id: uuid("id").notNull().primaryKey().defaultRandom().unique(),
+  fullName: varchar("full_name", { length: 255 }).notNull(),
+  email: text("email").notNull().unique(),
+  password: text("password").notNull(),
+  universityId: integer("university_id").notNull().unique(),
+  universityCard: text("university_card").notNull(),
+  status: STATUS_ENUM("status").default("PENDING").notNull(),
+  role: ROLE_ENUM("role").default("USER"),
+  lastActivityDate: date("last_activity_date").notNull().defaultNow(),
 
-   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
-   updatedAt: timestamp("updated_at", { withTimezone: true })
-      .notNull()
-      .defaultNow()
-      .$onUpdate(() => new Date())
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true })
+    .notNull()
+    .defaultNow()
+    .$onUpdate(() => new Date())
 })
 
 export type InsertUser = typeof users.$inferInsert
 export type SelectUser = typeof users.$inferSelect
+
+export const books = pgTable("books", {
+  id: uuid("id").notNull().primaryKey().defaultRandom().unique(),
+  title: varchar("title", { length: 255 }).notNull(),
+  author: varchar("author", { length: 255 }).notNull(),
+  genre: varchar("genre", { length: 100 }).notNull(),
+  rating: integer("rating").notNull(),
+  totalCopies: integer("total_copies").notNull().default(1),
+  availableCopies: integer("available_copies").notNull().default(1),
+  description: text("description").notNull(),
+  coverColor: varchar("cover_color", { length: 9 }).notNull(),
+  coverUrl: text("cover_url").notNull(),
+  videoUrl: text("video_url").notNull(),
+  summary: text("summary").notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow()
+})
