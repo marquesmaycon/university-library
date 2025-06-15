@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input"
 import { bookSchema } from "@/lib/validations"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
+import FileUpload from "@/components/FileUpload"
 
 type BookFormProps = Partial<Book> & {
   type: "CREATE" | "UPDATE"
@@ -108,7 +109,17 @@ const BookForm = ({ type, ...book }: BookFormProps) => {
           render={({ field }) => (
             <FormItem>
               <FormLabel className="text-base font-normal text-dark-500">Book Image</FormLabel>
-              <FormControl>{/*file upload component */}</FormControl>
+              <FormControl>
+                <FileUpload
+                  type="image"
+                  variant="light"
+                  accept="image/*"
+                  placeholder="Upload book cover image"
+                  folder="books/covers"
+                  onFileChange={field.onChange}
+                  // value={field.value}
+                />
+              </FormControl>
               <FormMessage />
             </FormItem>
           )}
@@ -143,7 +154,17 @@ const BookForm = ({ type, ...book }: BookFormProps) => {
           render={({ field }) => (
             <FormItem>
               <FormLabel className="text-base font-normal text-dark-500">Book Video</FormLabel>
-              <FormControl>{/*file upload component */}</FormControl>
+              <FormControl>
+                <FileUpload
+                  type="video"
+                  variant="light"
+                  accept="video/*"
+                  placeholder="Upload book trailer video"
+                  folder="books/videos"
+                  onFileChange={field.onChange}
+                  // value={field.value}
+                />
+              </FormControl>
               <FormMessage />
             </FormItem>
           )}

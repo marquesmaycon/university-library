@@ -1,25 +1,25 @@
 "use client"
 
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { toast } from "sonner"
 import type { FieldValues, DefaultValues, Path } from "react-hook-form"
-import type { ZodType } from "zod"
+import type { z, ZodType } from "zod"
+
+import { FIELD_NAMES, FIELD_TYPES } from "@/constants"
 
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "./ui/form"
-
 import { Input } from "./ui/input"
-import ImageUpload from "./ImageUpload"
-import { FIELD_NAMES, FIELD_TYPES } from "@/constants"
 import { Button } from "./ui/button"
-import { toast } from "sonner"
-import { useRouter } from "next/navigation"
+import FileUpload from "./FileUpload"
 
 type AuthFormProps<T extends FieldValues> = {
-   type: "SIGN_IN" | "SIGN_UP"
-   schema: ZodType<T>
-   defaultValues: T
-   onSubmit: (data: T) => Promise<{ success: boolean; error?: string }>
+  type: "SIGN_IN" | "SIGN_UP"
+  schema: ZodType<T>
+  defaultValues: T
+  onSubmit: (data: T) => Promise<{ success: boolean; error?: string }>
 }
 
 const AuthForm = <T extends FieldValues>({ type, schema, defaultValues, onSubmit }: AuthFormProps<T>) => {
@@ -59,7 +59,7 @@ const AuthForm = <T extends FieldValues>({ type, schema, defaultValues, onSubmit
                     <FormLabel className="capitalize">{FIELD_NAMES[field.name as keyof typeof FIELD_NAMES]}</FormLabel>
                     <FormControl>
                       {field.name === "universityCard" ? (
-                        <ImageUpload onFileChange={field.onChange} />
+                        <FileUpload type="image" accept="image/*" placeholder="Upload your university card" folder="ids" variant="dark" onFileChange={field.onChange} />
                       ) : (
                         <Input required type={FIELD_TYPES[f as keyof typeof FIELD_TYPES]} {...field} className="form-input" />
                       )}
