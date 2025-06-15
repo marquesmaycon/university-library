@@ -24,11 +24,14 @@ type FileUploadProps = {
   placeholder: string
   folder: string
   variant: "dark" | "light"
+  value?: string
   onFileChange: (file?: UploadResponse["filePath"] | null) => void
 }
 
-const FileUpload = ({ type, accept, placeholder, folder, variant = "dark", onFileChange }: FileUploadProps) => {
-  const [file, setFile] = useState<UploadResponse | null>(null)
+const FileUpload = ({ type, accept, placeholder, folder, variant = "dark", value, onFileChange }: FileUploadProps) => {
+  const [file, setFile] = useState<{ filePath: string | null }>({
+    filePath: value || null
+  })
   const [progress, setProgress] = useState(0)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
@@ -70,7 +73,7 @@ const FileUpload = ({ type, accept, placeholder, folder, variant = "dark", onFil
         // Abort signal to allow cancellation of the upload if needed.
         // abortSignal: abortController.signal
       })
-      setFile(uploadResponse)
+      setFile({ filePath: uploadResponse.filePath || null })
       onFileChange(uploadResponse.filePath)
       toast.success("File uploaded successfully: " + uploadResponse.filePath)
     } catch (error) {

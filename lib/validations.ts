@@ -14,11 +14,11 @@ export const signInSchema = z.object({
 })
 
 export const bookSchema = z.object({
-  title: z.string().min(2, "Title is required").max(200, "Title must be at most 200 characters long"),
-  description: z.string().min(10, "Description is required").max(1000, "Description must be at most 1000 characters long"),
-  author: z.string().trim().min(2, "Author is required").max(100, "Author must be at most 100 characters long"),
-  genre: z.string().trim().min(2, "Genre is required").max(100, "Genre must be at most 100 characters long"),
-  rating: z.number().min(1, "Rating must be at least 1").max(5, "Rating must be at most 5"),
+  title: z.string().min(2).max(200),
+  description: z.string().min(10).max(1000),
+  author: z.string().trim().min(2).max(100),
+  genre: z.string().trim().min(2).max(100),
+  rating: z.coerce.number().min(1).max(5),
   totalCopies: z.coerce.number().int().positive().lte(10000),
   coverUrl: z.string().nonempty(),
   coverColor: z

@@ -11,6 +11,7 @@ import { bookSchema } from "@/lib/validations"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 import FileUpload from "@/components/FileUpload"
+import ColorPicker from "../ColorPicker"
 
 type BookFormProps = Partial<Book> & {
   type: "CREATE" | "UPDATE"
@@ -26,14 +27,18 @@ const BookForm = ({ type, ...book }: BookFormProps) => {
       genre: "",
       rating: 0,
       totalCopies: 0,
-      coverUrl: "",
+      coverUrl: undefined,
       coverColor: "",
-      videoUrl: "",
+      videoUrl: undefined,
       summary: ""
     }
   })
 
-  const handleSubmit = async (data: z.infer<typeof bookSchema>) => {}
+  const handleSubmit = async (data: z.infer<typeof bookSchema>) => {
+    console.log(data)
+  }
+
+  console.log(form.getValues())
 
   return (
     <Form {...form}>
@@ -97,7 +102,7 @@ const BookForm = ({ type, ...book }: BookFormProps) => {
             <FormItem>
               <FormLabel className="text-base font-normal text-dark-500">Total Copies</FormLabel>
               <FormControl>
-                <Input type="number" min={10000} placeholder="Total copies" className="book-form_input" {...field} />
+                <Input type="number" placeholder="Total copies" className="book-form_input" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -117,7 +122,7 @@ const BookForm = ({ type, ...book }: BookFormProps) => {
                   placeholder="Upload book cover image"
                   folder="books/covers"
                   onFileChange={field.onChange}
-                  // value={field.value}
+                  value={field.value}
                 />
               </FormControl>
               <FormMessage />
@@ -130,7 +135,9 @@ const BookForm = ({ type, ...book }: BookFormProps) => {
           render={({ field }) => (
             <FormItem>
               <FormLabel className="text-base font-normal text-dark-500">Primary Color</FormLabel>
-              <FormControl>Color Picker</FormControl>
+              <FormControl>
+                <ColorPicker value={field.value} onChange={field.onChange} />
+              </FormControl>
               <FormMessage />
             </FormItem>
           )}
@@ -162,7 +169,7 @@ const BookForm = ({ type, ...book }: BookFormProps) => {
                   placeholder="Upload book trailer video"
                   folder="books/videos"
                   onFileChange={field.onChange}
-                  // value={field.value}
+                  value={field.value}
                 />
               </FormControl>
               <FormMessage />
