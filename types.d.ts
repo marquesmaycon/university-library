@@ -22,3 +22,16 @@ type AuthCredentials = {
    universityId: number
    universityCard: string
 }
+
+type BookParams = {
+  title: string
+  author: string
+  genre: string
+  rating: number
+  totalCopies: number
+  coverUrl: string
+  coverColor: string
+  videoUrl: string
+  summary: string
+  description: string
+}
