@@ -1,18 +1,18 @@
 type Book = {
-   id: number
-   title: string
-   author: string
-   genre: string
-   rating: number
-   totalCopies: number
-   availableCopies: number
-   description: string
-   coverColor: string
-   coverUrl: string
-   videoUrl: string
-   summary: string
-   isLoaned?: boolean
-   // createdAt: Date | null
+  id: string
+  title: string
+  author: string
+  genre: string
+  rating: number
+  totalCopies: number
+  availableCopies: number
+  description: string
+  coverColor: string
+  coverUrl: string
+  videoUrl: string
+  summary: string
+  isLoaned?: boolean
+  createdAt: Date | null
 }
 
 type AuthCredentials = {
