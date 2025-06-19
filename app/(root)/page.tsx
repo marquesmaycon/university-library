@@ -2,7 +2,7 @@ import { desc } from "drizzle-orm"
 
 import { db } from "@/database/drizzle"
 import { books } from "@/database/schema"
-import BookOverview from "@/components/BookOverview"
+import { BookOverview } from "@/components/BookOverview"
 import BookList from "@/components/BookList"
 
 export default async function Home() {

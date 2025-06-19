@@ -35,3 +35,8 @@ type BookParams = {
   summary: string
   description: string
 }
+
+type BorrowBookParams = {
+  bookId: string
+  userId: string
+}

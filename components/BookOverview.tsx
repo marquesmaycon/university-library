@@ -2,8 +2,26 @@ import Image from "next/image"
 
 import { Button } from "./ui/button"
 import BookCover from "./BookCover"
+import BorrowBook from "./BorrowBook"
+import { db } from "@/database/drizzle"
+import { users } from "@/database/schema"
+import { eq } from "drizzle-orm"
+import { auth } from "@/auth"
+// TO DO => CONVERTER COMPONENTES COMUNS EM NAMED EXPORTS
 
-export default function BookOverview({ id, title, author, genre, rating, totalCopies, availableCopies, description, coverColor, coverUrl, videoUrl, summary }: Book) {
+type BookOverviewProps = Book & {}
+
+export const BookOverview = async ({ id, title, author, genre, rating, totalCopies, availableCopies, description, coverColor, coverUrl }: BookOverviewProps) => {
+  const session = await auth()
+  const [user] = await db.select().from(users).where(eq(users.id, session?.user?.id!)).limit(1)
+
+  if (!user) return null
+
+  const borrowingEligibility = {
+    isEligible: availableCopies > 0 && user.status === "APPROVED",
+    message: availableCopies <= 0 ? "This book is currently not available for borrowing." : "You are not eligible to borrow this book."
+  }
+
   return (
     <section className="book-overview">
       <div className="flex flex-1 flex-col gap-5">
@@ -34,10 +52,7 @@ export default function BookOverview({ id, title, author, genre, rating, totalCo
 
         <p className="book-description">{description}</p>
 
-        <Button className="book-overview__btn">
-          <Image src="/icons/book.svg" alt="book" width={20} height={20} />
-          <p className="font-bebas-neue text-xl text-dark-100">Borrow</p>
-        </Button>
+        <BorrowBook bookId={id} userId={session?.user?.id!} borrowingEligibility={borrowingEligibility} />
       </div>
 
       <div className="relative flex flex-1 justify-center">
