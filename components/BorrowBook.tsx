@@ -33,7 +33,7 @@ const BorrowBook = ({
       const result = await borrowBook({ bookId, userId })
       if (result.success) {
         toast.success("Success", { description: "Book borrowed successfully!" })
-        router.push("/my-profile")
+        router.push("/")
       } else {
         toast.error("Error", { description: result.message || "An error occurred while borrowing the book." })
       }
