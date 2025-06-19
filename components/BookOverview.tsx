@@ -15,10 +15,8 @@ export const BookOverview = async ({ id, title, author, genre, rating, totalCopi
   const session = await auth()
   const [user] = await db.select().from(users).where(eq(users.id, session?.user?.id!)).limit(1)
 
-  if (!user) return null
-
   const borrowingEligibility = {
-    isEligible: availableCopies > 0 && user.status === "APPROVED",
+    isEligible: availableCopies > 0 && user?.status === "APPROVED",
     message: availableCopies <= 0 ? "This book is currently not available for borrowing." : "You are not eligible to borrow this book."
   }
 
@@ -52,7 +50,7 @@ export const BookOverview = async ({ id, title, author, genre, rating, totalCopi
 
         <p className="book-description">{description}</p>
 
-        <BorrowBook bookId={id} userId={session?.user?.id!} borrowingEligibility={borrowingEligibility} />
+        {user && <BorrowBook bookId={id} userId={session?.user?.id!} borrowingEligibility={borrowingEligibility} />}
       </div>
 
       <div className="relative flex flex-1 justify-center">
