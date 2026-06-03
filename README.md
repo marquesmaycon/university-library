@@ -1,80 +1,61 @@
 # University Library
 
-Sistema de biblioteca universitaria com autenticacao, cadastro de livros, emprestimos e fluxos academicos.
+Sistema web de biblioteca universitária desenvolvido com TypeScript para gestão de livros, usuários e fluxo acadêmico.
 
-![Next.js 15](https://img.shields.io/badge/Nextjs_15-20232A?style=flat-square)
-![React 19](https://img.shields.io/badge/React_19-20232A?style=flat-square)
-![TypeScript](https://img.shields.io/badge/TypeScript-20232A?style=flat-square)
-![Drizzle ORM](https://img.shields.io/badge/Drizzle_ORM-20232A?style=flat-square)
-![Neon](https://img.shields.io/badge/Neon-20232A?style=flat-square)
-![NextAuth](https://img.shields.io/badge/NextAuth-20232A?style=flat-square)
-![ImageKit](https://img.shields.io/badge/ImageKit-20232A?style=flat-square)
-![Upstash](https://img.shields.io/badge/Upstash-20232A?style=flat-square)
-![Zod](https://img.shields.io/badge/Zod-20232A?style=flat-square)
-
-## Demo
-
-Este projeto nao possui demo publica ativa no momento.
+![Next.js](https://img.shields.io/badge/Next.js-000000?style=plastic&logo=nextdotjs)
+![React](https://img.shields.io/badge/React-20232A?style=plastic&logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=plastic&logo=typescript&logoColor=fff)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-06B6D4?style=plastic&logo=tailwindcss&logoColor=fff)
+![Radix UI](https://img.shields.io/badge/Radix_UI-161618?style=plastic&logo=radixui&logoColor=fff)
+![Drizzle](https://img.shields.io/badge/Drizzle-C5F74F?style=plastic&logo=drizzle&logoColor=000)
+![Zod](https://img.shields.io/badge/Zod-3E67B1?style=plastic&logo=zod&logoColor=fff)
+![ESLint](https://img.shields.io/badge/ESLint-4B32C3?style=plastic&logo=eslint&logoColor=fff)
 
 ## Sobre
 
-Sistema de biblioteca universitaria com autenticacao, cadastro de livros, emprestimos e fluxos academicos.
-
-O objetivo deste repositorio e demonstrar uma implementacao clara, organizada e facil de avaliar, com documentacao objetiva para recrutadores e pessoas tecnicas entenderem rapidamente o contexto do projeto.
+Sistema web de biblioteca universitária desenvolvido com TypeScript para gestão de livros, usuários e fluxo acadêmico.
 
 ## Funcionalidades
 
-- Autenticacao.
-- Gestao de livros.
-- Fluxo de emprestimos.
-- Upload de imagens.
-- Banco PostgreSQL.
-- Rate limiting.
-- Workflow automatizado.
+- Gestao de livros e dados relacionados a biblioteca universitaria.
+- Organizacao de usuarios e fluxo academico.
+- Interface web para operacoes administrativas.
+- Experiencia responsiva para consulta e manutencao de dados.
 
 ## Stack
 
-- **Next.js 15**
-- **React 19**
-- **TypeScript**
-- **Drizzle ORM**
-- **Neon**
-- **NextAuth**
-- **ImageKit**
-- **Upstash**
-- **Zod**
+- Next.js
+- React
+- TypeScript
+- TailwindCSS
+- Radix UI
+- Drizzle
+- Zod
+- ESLint
 
 ## Como executar
 
 ```bash
-git clone https://github.com/marquesmaycon/university-library.git
-cd university-library
 npm install
 npm run dev
 ```
 
 ## Scripts disponiveis
 
-- `npm run dev`
-- `npm run build`
-- `npm run start`
-- `npm run lint`
-- `npm run db:generate`
-- `npm run db:migrate`
-- `npm run db:studio`
-- `npm run db:seed`
+```bash
+npm run dev
+npm run build
+npm run start
+npm run lint
+```
 
 ## Destaques tecnicos
 
-- Projeto full-stack completo.
-- Combina auth, banco, storage e automacoes.
-- Excelente para portfólio educacional/backend.
+- Projeto educacional com foco em gestao academica.
+- Interface React e TypeScript para operacao de biblioteca.
+- Organizacao de dominio voltada a livros, usuarios e processos.
 
-## Repositorio
-
-[Acessar repositorio no GitHub](https://github.com/marquesmaycon/university-library)
-
----
+## Autor
 
 <div align="center">
   <img src="https://github.com/marquesmaycon.png" width="100px" style="border-radius: 50%"/>
@@ -83,7 +64,8 @@ npm run dev
   <br/>
   <br/>
 
-  [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mayconhenrique/)
+  [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat-square&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0nMjU2JyBoZWlnaHQ9JzI1NicgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSd4TWlkWU1pZCcgdmlld0JveD0nMCAwIDI1NiAyNTYnPjxwYXRoIGQ9J00yMTguMTIzIDIxOC4xMjdoLTM3LjkzMXYtNTkuNDAzYzAtMTQuMTY1LS4yNTMtMzIuNC0xOS43MjgtMzIuNC0xOS43NTYgMC0yMi43NzkgMTUuNDM0LTIyLjc3OSAzMS4zNjl2NjAuNDNoLTM3LjkzVjk1Ljk2N2gzNi40MTN2MTYuNjk0aC41MWEzOS45MDcgMzkuOTA3IDAgMCAxIDM1LjkyOC0xOS43MzNjMzguNDQ1IDAgNDUuNTMzIDI1LjI4OCA0NS41MzMgNTguMTg2bC0uMDE2IDY3LjAxM1pNNTYuOTU1IDc5LjI3Yy0xMi4xNTcuMDAyLTIyLjAxNC05Ljg1Mi0yMi4wMTYtMjIuMDA5LS4wMDItMTIuMTU3IDkuODUxLTIyLjAxNCAyMi4wMDgtMjIuMDE2IDEyLjE1Ny0uMDAzIDIyLjAxNCA5Ljg1MSAyMi4wMTYgMjIuMDA4QTIyLjAxMyAyMi4wMTMgMCAwIDEgNTYuOTU1IDc5LjI3bTE4Ljk2NiAxMzguODU4SDM3Ljk1Vjk1Ljk2N2gzNy45N3YxMjIuMTZaTTIzNy4wMzMuMDE4SDE4Ljg5QzguNTgtLjA5OC4xMjUgOC4xNjEtLjAwMSAxOC40NzF2MjE5LjA1M2MuMTIyIDEwLjMxNSA4LjU3NiAxOC41ODIgMTguODkgMTguNDc0aDIxOC4xNDRjMTAuMzM2LjEyOCAxOC44MjMtOC4xMzkgMTguOTY2LTE4LjQ3NFYxOC40NTRjLS4xNDctMTAuMzMtOC42MzUtMTguNTg4LTE4Ljk2Ni0xOC40NTMnIGZpbGw9JyNmZmYnLz48L3N2Zz4K)](https://www.linkedin.com/in/mayconhenrique/)
   [![GitHub](https://img.shields.io/badge/GitHub-100000?style=flat-square&logo=github&logoColor=white)](https://github.com/marquesmaycon)
   [![Email](https://img.shields.io/badge/Email-D14836?style=flat-square&logo=gmail&logoColor=white)](mailto:mayconmarquesh@gmail.com)
+  [![WhatsApp](https://img.shields.io/badge/WhatsApp-25D366?style=flat-square&logo=whatsapp&logoColor=white)](https://wa.me/5544991173753)
 </div>
